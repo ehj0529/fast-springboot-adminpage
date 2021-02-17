@@ -11,8 +11,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity //== table
-//@Table(name ="user") --> 테이블명과 엔티티명이 동일 하므로 생략가능
+@Entity
 public class User {
 
     @Id
@@ -21,9 +20,17 @@ public class User {
 
     private String account;
 
+    private String password ;
+
+    private String status ;
+
     private String email;
 
     private String phoneNumber;
+
+    private LocalDateTime registeredAt ;
+
+    private LocalDateTime unregisteredAt;
 
     private LocalDateTime createdAt;
 
@@ -33,7 +40,5 @@ public class User {
 
     private String updatedBy;
 
-    // user : orderDetail 의 관계는 1 : N
-    @OneToMany(fetch = FetchType.LAZY , mappedBy = "user") // 변수명은 orderDateil의 변수명과 동일 해야 됨.
-    private List<OrderDetail> orderDetailList;
+
 }

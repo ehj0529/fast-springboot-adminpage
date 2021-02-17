@@ -6,13 +6,13 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@ToString(exclude = {"user","item"}) // N:N으로 참조됨으로 오버플로우가 발생. 롬복이 toString() 자동생성때문. 그거를제거.
 public class OrderDetail {
 
     @Id
@@ -21,11 +21,24 @@ public class OrderDetail {
 
     private LocalDateTime orderAt;
 
-    // orderDetail : user 의 관계는 N:1 관계임.
-    @ManyToOne
-    private User user;//user_id가 자동 설정 된다. 하이버네이트에서 제공.
+    private String status ;
 
-    @ManyToOne
-    private Item item;
+    private LocalDateTime arrivalDate;
+
+    private Integer quantity;
+
+    private BigDecimal totalPrice;
+
+    private LocalDateTime createdAt;
+
+    private String createdBy;
+
+    private LocalDateTime updatedAt;
+
+    private String updatedBy;
+
+    private Long orderGroupId;
+
+    private Long itemId;
 
 }

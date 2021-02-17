@@ -44,12 +44,12 @@ public class UserRepositoryTest extends StudyApplicationTests {
             // System.out.println("user : " + selectUser);
             // System.out.println("eMail : " + selectUser.getEmail());
 
-            selectUser.getOrderDetailList().stream().forEach( detail ->{
-                Item item = detail.getItem();
-                System.out.println(item);
+            //selectUser.getOrderDetailList().stream().forEach( detail ->{
+                //Item item = detail.getItem();
+                //System.out.println(item);
                 //System.out.println("orderDetail Item_ID :: "+detail.getItemId());
                 //System.out.println("잘됨.");
-            });
+            //});
 
         });
 
