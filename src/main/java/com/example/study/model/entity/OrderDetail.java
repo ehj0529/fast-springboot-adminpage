@@ -1,9 +1,12 @@
 package com.example.study.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+import lombok.experimental.Accessors;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -13,13 +16,15 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@ToString(exclude = {"orderGroup","item"})
+@EntityListeners(AuditingEntityListener.class)  //감시자엔티티 리스너를 사용한다.
+@Builder  //  객체생성할때 적용 생성자라 각각 필요하지 않음. .builder().account("Test1").password("123").build()의 형식으로 적용.
+@Accessors(chain = true) // Update 시 엔티티 변경을 셋 할때 빌드생성자와 같은 개념으로 user.setEmail().setStatus() 형식으로 생성한다.
 public class OrderDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    //private LocalDateTime orderAt;
 
     private String status ;
 
@@ -29,16 +34,24 @@ public class OrderDetail {
 
     private BigDecimal totalPrice;
 
-    private LocalDateTime createdAt;
+    @CreatedDate //엔티티의 값들이 수정이되면 자동으로 값에 셋팅 된다. 이하 컨트럴 필드 모두
+    private LocalDateTime createdAt ;
 
-    private String createdBy;
+    @CreatedBy
+    private String createdBy ;
 
-    private LocalDateTime updatedAt;
+    @LastModifiedDate
+    private LocalDateTime updatedAt ;
 
-    private String updatedBy;
+    @LastModifiedBy
+    private String updatedBy ;
 
-    private Long orderGroupId;
+    //OrderDetail N : 1 Item
+    @ManyToOne
+    private Item item;
 
-    private Long itemId;
+    // OrderDetail 1 : N OrderGroup
+    @ManyToOne
+    private OrderGroup orderGroup;
 
 }
