@@ -1,4 +1,4 @@
-package com.example.study.sampledata;
+package com.example.study.sample;
 
 import com.example.study.StudyApplicationTests;
 import com.example.study.model.entity.Category;
@@ -8,9 +8,9 @@ import com.example.study.model.enumclass.ItemStatus;
 import com.example.study.repository.CategoryRepository;
 import com.example.study.repository.ItemRepository;
 import com.example.study.repository.PartnerRepository;
-import com.sun.xml.internal.ws.util.CompletedFuture;
+
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;

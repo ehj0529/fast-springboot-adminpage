@@ -1,14 +1,11 @@
-package com.example.study.sampledata;
+package com.example.study.sample;
 
 import com.example.study.StudyApplicationTests;
-import com.example.study.model.entity.AdminUser;
 import com.example.study.model.entity.User;
 import com.example.study.model.enumclass.UserStatus;
-import com.example.study.repository.AdminUserRepository;
 import com.example.study.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
@@ -42,7 +39,7 @@ public class UserSample extends StudyApplicationTests {
                     .unregisteredAt(status.equals(UserStatus.UNREGISTERED) ? getRandomDate() : null )
                     .build();
 
-            log.info("{}",user);
+            //log.info("{}",user);
             userRepository.save(user);
         }
 

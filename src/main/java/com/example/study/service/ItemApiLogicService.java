@@ -13,13 +13,13 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 
 @Service
-public class ItemApiLogicService implements CrudInterface<ItemApiRequest, ItemApiResponse> {
-
+public class ItemApiLogicService // implements CrudInterface<ItemApiRequest, ItemApiResponse> { 추상화 상속 적용으로 제외
+                extends BaseService<ItemApiRequest,ItemApiResponse, Item>{ //추상화 서비스 클래스 적용.
     @Autowired
     private PartnerRepository partnerRepository;
 
-    @Autowired
-    private ItemRepository itemRepository;
+    //@Autowired
+    //private ItemRepository itemRepository; 추상화 서비스 상속으로 제외 처리됨.
 
     @Override
     public Header<ItemApiResponse> create(Header<ItemApiRequest> request) {
@@ -36,14 +36,15 @@ public class ItemApiLogicService implements CrudInterface<ItemApiRequest, ItemAp
                 .partner(partnerRepository.getOne(body.getPartnerId()))
                 .build();
 
-        Item newItem = itemRepository.save(item) ;
+        //Item newItem = itemRepository.save(item) ; // 추상화 상속으로 아래와 같이 변경됨.
+        Item newItem = baseRepository.save(item) ;
         return response(newItem);
     }
 
     @Override
     public Header<ItemApiResponse> read(Long id) {
 
-        return itemRepository.findById(id)
+        return baseRepository.findById(id)
                 .map(item -> response(item))
                 .orElseGet(() -> Header.ERROR("데이터 없음."));
     }
@@ -52,7 +53,7 @@ public class ItemApiLogicService implements CrudInterface<ItemApiRequest, ItemAp
     public Header<ItemApiResponse> update(Header<ItemApiRequest> request) {
 
         ItemApiRequest body = request.getData();
-        return itemRepository.findById(body.getId())
+        return baseRepository.findById(body.getId())
                 .map( entityItem -> { entityItem.setStatus(body.getStatus())
                         .setName(body.getName())
                         .setTitle(body.getTitle())
@@ -64,7 +65,7 @@ public class ItemApiLogicService implements CrudInterface<ItemApiRequest, ItemAp
                     return entityItem;
                 })
                 .map( newEntityItem -> {
-                    itemRepository.save(newEntityItem);
+                    baseRepository.save(newEntityItem);
                     return newEntityItem;
                 })
                 .map( modifyItem -> response(modifyItem))
@@ -74,16 +75,16 @@ public class ItemApiLogicService implements CrudInterface<ItemApiRequest, ItemAp
 
     @Override
     public Header delete(Long id) {
-        return itemRepository.findById(id)
+        return baseRepository.findById(id)
             .map( item -> {
-                itemRepository.delete(item);
+                baseRepository.delete(item);
                 return Header.OK();
             })
             .orElseGet(()-> Header.ERROR("삭제 대상이 없습니다."));
 
     }
 
-    private Header<ItemApiResponse> response(Item item){
+    public Header<ItemApiResponse> response(Item item){
 
         ItemApiResponse body = ItemApiResponse.builder()
                 .id(item.getId())

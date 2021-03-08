@@ -2,11 +2,13 @@ package com.example.study.repository;
 
 import com.example.study.StudyApplicationTests;
 import com.example.study.model.entity.Item;
+import com.example.study.model.enumclass.ItemStatus;
 import org.junit.Assert;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -19,11 +21,11 @@ public class ItemRepositoryTest extends StudyApplicationTests {
     public void create(){
         Item item = new Item();
 
-        item.setStatus("UNREGISTERED");
+        item.setStatus(ItemStatus.UNREGISTERED);
         item.setName("SamSung NoteBook");
         item.setTitle("SAMSUNG NOTEBOOK A100");
         item.setContent("2021년형 SamSung NoteBook");
-        item.setPrice(100000);
+        item.setPrice(BigDecimal.valueOf(100000));
         item.setBrandName("삼성");
         item.setRegisteredAt(LocalDateTime.now());
         item.setCreatedAt(LocalDateTime.now());

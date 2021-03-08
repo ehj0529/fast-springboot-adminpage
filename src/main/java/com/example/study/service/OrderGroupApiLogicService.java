@@ -89,7 +89,7 @@ public class OrderGroupApiLogicService implements CrudInterface<OrderGroupApiReq
                 .orElseGet(() -> Header.ERROR("삭제 대상이 없습니다다."));
     }
 
-   private Header<OrderGroupApiResponse> response(OrderGroup orderGroup){
+   public Header<OrderGroupApiResponse> response(OrderGroup orderGroup){
          OrderGroupApiResponse body = OrderGroupApiResponse.builder()
                 .id(orderGroup.getId())
                 .status(orderGroup.getStatus())

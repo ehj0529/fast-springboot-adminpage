@@ -1,4 +1,4 @@
-package com.example.study.model.network.request;
+package com.example.study.model.network.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,17 +11,17 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PartnerApiRequest {
+public class PartnerApiResponse {
 
     private Long id;
 
     private String name;
 
-    private String Status;
+    private String status;
 
     private String address;
 
-    private String cellCenter;
+    private String callCenter;
 
     private String partnerNumber;
 

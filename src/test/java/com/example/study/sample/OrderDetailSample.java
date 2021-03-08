@@ -1,4 +1,4 @@
-package com.example.study.sampledata;
+package com.example.study.sample;
 
 import com.example.study.StudyApplicationTests;
 import com.example.study.model.entity.Item;
@@ -11,7 +11,7 @@ import com.example.study.repository.OrderDetailRepository;
 import com.example.study.repository.OrderGroupRepository;
 import com.example.study.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
